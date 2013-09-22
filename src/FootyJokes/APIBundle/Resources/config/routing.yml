@@ -1,0 +1,23 @@
+footy_jokes_api_jokes:
+    pattern:  /jokes
+    defaults: { _controller: FootyJokesAPIBundle:Joke:get, from:0, maxResults:0 }
+    
+footy_jokes_api_jokes_max_results:
+    pattern:  /jokes/maxResults/{maxResults}
+    defaults: { _controller: FootyJokesAPIBundle:Joke:get, from:0 }
+
+footy_jokes_api_jokes_from:
+    pattern:  /jokes/from/{from}
+    defaults: { _controller: FootyJokesAPIBundle:Joke:get, maxResults:0 }
+
+footy_jokes_api_jokes_from_max_results:
+    pattern:  /jokes/from/{from}/maxResults/{maxResults}
+    defaults: { _controller: FootyJokesAPIBundle:Joke:get }
+    
+footy_jokes_api_random_joke:
+    pattern:  /joke/random
+    defaults: { _controller: FootyJokesAPIBundle:Joke:random }
+    
+footy_jokes_api_add_joke:
+    pattern:  /joke/add
+    defaults: { _controller: FootyJokesAPIBundle:Joke:add }

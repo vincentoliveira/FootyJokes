@@ -1,0 +1,61 @@
+<?php
+
+namespace FootyJokes\APIBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Joke
+ *
+ * @ORM\Table(name="joke")
+ * @ORM\Entity(repositoryClass="FootyJokes\APIBundle\Entity\Repository\JokeRepository")
+ * @ORM\HasLifecycleCallbacks
+ */
+class Joke
+{
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=false)
+     */
+    private $date;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=31, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=127, nullable=false)
+     */
+    private $path;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="visible", type="boolean", length=127, nullable=false)
+     */
+    private $visible;
+
+    /*
+     * @var File
+     * @Assert\NotBlank
+     * @Assert\NotNull
+     * @Assert\File(maxSize="2M")
+     */
+    public $file;
+}

@@ -1,0 +1,9 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <form action="" method="POST">
+        {{ form_rest(form) }}
+        <p>
+            <button type="submit">{{'Edit'|trans }}</button>
+        </p>
+    </form>
+{% endblock %}

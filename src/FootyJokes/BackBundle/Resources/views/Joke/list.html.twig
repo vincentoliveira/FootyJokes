@@ -1,0 +1,25 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <table>
+        <thead>
+            <tr>
+                <th>{{ 'ID'|trans }}</th>
+                <th>{{ 'Publishing date'|trans }}</th>
+                <th>{{ 'Title'|trans }}</th>
+                <th>{{ 'Image'|trans }}</th>
+                <th>{{ 'Actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for joke in jokes %}
+                <tr {% if not joke.visible %}style="background: #FFBBAE;"{% endif %}>
+                    <td>{{ joke.id }}</td>
+                    <td>{{ joke.date|date('d/m/Y') }}</td>
+                    <td>{{ joke.title }}</td>
+                    <td><a href="{{ joke.webPath }}" target="_blank">{{ joke.path }}</a></td>
+                    <td><a href="{{ path('footy_jokes_back_edit_joke', {id: joke.id, page: page}) }}">Edit</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

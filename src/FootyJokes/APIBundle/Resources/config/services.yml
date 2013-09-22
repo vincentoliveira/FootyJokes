@@ -1,0 +1,7 @@
+parameters:
+#    footy_jokes_api.example.class: FootyJokes\APIBundle\Example
+
+services:
+#    footy_jokes_api.example:
+#        class: %footy_jokes_api.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

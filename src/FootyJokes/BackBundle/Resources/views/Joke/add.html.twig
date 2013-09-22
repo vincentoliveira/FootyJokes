@@ -1,0 +1,9 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <form action="{{ path('footy_jokes_api_add_joke') }}" method="POST" {{ form_enctype(form) }}>
+        {{ form_rest(form) }}
+        <p>
+            <button type="submit">{{'Add'|trans }}</button>
+        </p>
+    </form>
+{% endblock %}

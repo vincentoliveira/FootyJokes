@@ -1,0 +1,8 @@
+footy_jokes_back:
+    resource: "@FootyJokesBackBundle/Resources/config/routing.yml"
+    prefix:   /
+
+footy_jokes_api:
+    resource: "@FootyJokesAPIBundle/Resources/config/routing.yml"
+    prefix:   /api
+
