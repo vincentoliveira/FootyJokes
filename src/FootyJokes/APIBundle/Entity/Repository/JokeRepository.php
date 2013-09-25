@@ -22,6 +22,7 @@ class JokeRepository extends EntityRepository
                 ->andWhere('joke.date < :now')
                 ->setParameter(':now', new \DateTime())
                 ->orderBy('joke.date', 'DESC')
+                ->addOrderBy('joke.id', 'DESC')
         ;
         
         if ($first > 0) {
@@ -44,6 +45,7 @@ class JokeRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('joke')
                 ->orderBy('joke.date', 'DESC')
+                ->addOrderBy('joke.id', 'DESC')
         ;
 
         if ($first > 0) {
