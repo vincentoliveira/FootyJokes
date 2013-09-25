@@ -1,0 +1,7 @@
+parameters:
+#    footy_jokes_import.example.class: FootyJokes\ImportBundle\Example
+
+services:
+    footy_jokes_import.twitter:
+      class:      FootyJokes\ImportBundle\Twitter\TwitterManager
+      arguments:  ["@service_container"]

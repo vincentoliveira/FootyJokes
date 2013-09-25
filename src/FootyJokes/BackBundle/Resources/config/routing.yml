@@ -1,9 +1,9 @@
 footy_jokes_back_add_joke:
-    pattern:  /add
+    pattern:  /joke/add
     defaults: { _controller: FootyJokesBackBundle:Joke:add }
     
 footy_jokes_back_edit_joke:
-    pattern:  /edit/{id}/{page}
+    pattern:  /joke/edit/{id}/{page}
     defaults: { _controller: FootyJokesBackBundle:Joke:edit }
 
 footy_jokes_back_joke_list:

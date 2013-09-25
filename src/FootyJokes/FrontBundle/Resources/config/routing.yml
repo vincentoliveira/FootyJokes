@@ -1,0 +1,3 @@
+footy_jokes_front_homepage:
+    pattern:  /
+    defaults: { _controller: FootyJokesFrontBundle:Default:index }

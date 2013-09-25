@@ -1,6 +1,14 @@
+footy_jokes_front:
+    resource: "@FootyJokesFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
+footy_jokes_import:
+    resource: "@FootyJokesImportBundle/Resources/config/routing.yml"
+    prefix:   /import
+
 footy_jokes_back:
     resource: "@FootyJokesBackBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /admin
 
 footy_jokes_api:
     resource: "@FootyJokesAPIBundle/Resources/config/routing.yml"
