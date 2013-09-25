@@ -18,6 +18,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FootyJokes\APIBundle\FootyJokesAPIBundle(),
             new FootyJokes\BackBundle\FootyJokesBackBundle(),
+            new FootyJokes\ImportBundle\FootyJokesImportBundle(),
+            new FootyJokes\FrontBundle\FootyJokesFrontBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
