@@ -5,20 +5,12 @@ namespace FootyJokes\BackBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-use FootyJokes\APIBundle\Form\JokeType;
-use FootyJokes\APIBundle\Form\EditJokeType;
+use FootyJokes\APIBundle\Entity\Joke;
+use FootyJokes\BackBundle\Form\JokeType;
+use FootyJokes\BackBundle\Form\EditJokeType;
 
 class JokeController extends Controller
 {
-    /**
-     * @Template()
-     */
-    public function addAction()
-    {
-        $form = $this->createForm(new JokeType());
-        return array('form' => $form->createView());
-    }
-    
     /**
      * @Template()
      */
@@ -54,6 +46,29 @@ class JokeController extends Controller
      */
     public function listAction($page = 1)
     {
+        $form = $this->createForm(new JokeType());
+        
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->bind($request);
+            if ($form->isValid()) {
+                try {
+                    $manager = $this->container->get('footy_jokes.joke_manager');
+                    $joke = $manager->add($form->getData());
+                    $this->container->get('session')->getFlashBag()->add(
+                        'success',
+                        'New joke has been added.'
+                    );
+                }
+                catch (\Exception $e) {
+                    $this->container->get('session')->getFlashBag()->add(
+                        'error',
+                        'An error has occured: '.$e->getMessage()
+                    );
+                }
+            }
+        }
+        
         $maxResults = $this->container->getParameter('jokes_back_max_results');
         $first = ($page - 1) * $maxResults;
         
@@ -61,8 +76,12 @@ class JokeController extends Controller
                 ->getRepository('FootyJokesAPIBundle:Joke')
                 ->getAll($first, $maxResults);
         
+        $maxPages = ceil($jokes['count'] / $maxResults);
+        
         return array(
-            'jokes' => $jokes,
+            'form' => $form->createView(),
+            'jokes' => $jokes['jokes'],
+            'maxPages' => $maxPages,
             'page' => $page,
         );
     }

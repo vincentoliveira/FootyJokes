@@ -2,6 +2,14 @@ footy_jokes_import_homepage:
     pattern:  /
     defaults: { _controller: FootyJokesImportBundle:Default:index }
 
-footy_jokes_import_twitter:
-    pattern:  /twitter/timeline/{screenName}
-    defaults: { _controller: FootyJokesImportBundle:Twitter:timeline }
+footy_jokes_import_twitter_user_timeline:
+    pattern:  /twitter/usertimeline/{screenName}
+    defaults: { _controller: FootyJokesImportBundle:Twitter:userTimeline }
+    options:
+        expose: true
+
+footy_jokes_import_twitter_home_timeline:
+    pattern:  /twitter/hometimeline/{screenName}
+    defaults: { _controller: FootyJokesImportBundle:Twitter:homeTimeline }
+    options:
+        expose: true

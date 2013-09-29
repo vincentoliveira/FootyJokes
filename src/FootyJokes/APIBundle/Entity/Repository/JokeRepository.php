@@ -39,11 +39,21 @@ class JokeRepository extends EntityRepository
      * Get all jokes (paginated)
      * @param $first
      * @param $maxResults
-     * @return array
+     * @return array ['count'] => maxJokes, ['jokes'] => paginated jokes
      */
     public function getAll($first = 0, $maxResults = 0)
     {
-        $query = $this->createQueryBuilder('joke')
+        $query = $this->createQueryBuilder('joke');
+        
+        // count pictures
+        $count = $query
+                ->select('count(joke)')
+                ->getQuery()
+                ->getSingleScalarResult()
+        ;
+        
+        // get paginated jokes
+        $query->select('joke')
                 ->orderBy('joke.date', 'DESC')
                 ->addOrderBy('joke.id', 'DESC')
         ;
@@ -55,7 +65,12 @@ class JokeRepository extends EntityRepository
             $query->setMaxResults($maxResults);
         }
         
-        return $query->getQuery()->getResult();
+        $jokes = $query->getQuery()->getResult();
+        
+        return array(
+            'count' => $count,
+            'jokes' => $jokes,
+        );
     }
     
     /**

@@ -1,9 +1,19 @@
-{% extends "::base.html.twig" %}
+{% extends "FootyJokesBackBundle::base.html.twig" %}
 {% block body %}
-    <form action="" method="POST">
-        {{ form_rest(form) }}
-        <p>
-            <button type="submit">{{'Edit'|trans }}</button>
-        </p>
-    </form>
+<form role="form" action="#" method="POST" {{ form_enctype(form) }}>
+    <div class="form-group">
+        {{ form_label(form.date) }}
+        {{ form_widget(form.date) }}
+     </div>
+    <div class="form-group">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+    </div>
+    <div class="checkbox">
+        {{ form_label(form.visible) }}
+        {{ form_widget(form.visible) }}
+    </div>
+    {{ form_rest(form) }}
+    <button  type="submit" class="btn btn-primary">{{'Add joke'|trans }}</button>
+</form>
 {% endblock %}

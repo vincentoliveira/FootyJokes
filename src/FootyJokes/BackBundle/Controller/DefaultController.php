@@ -1,6 +1,6 @@
 <?php
 
-namespace FootyJokes\ImportBundle\Controller;
+namespace FootyJokes\BackBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;

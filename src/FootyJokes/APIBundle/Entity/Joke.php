@@ -55,11 +55,14 @@ class Joke
 
     /*
      * @var File
-     * @Assert\NotBlank
-     * @Assert\NotNull
      * @Assert\File(maxSize="2M")
      */
     public $file;
+    
+    /**
+     * @var string 
+     */
+    public $tmpPath;
 
     /**
      * Get id
@@ -195,8 +198,11 @@ class Joke
      */
     public function preUpload()
     {
+        if (null !== $this->tmpPath) {
+            $ext = basename(mime_content_type($this->tmpPath));
+            $this->path = sha1(uniqid(mt_rand(), true)).'.'.$ext;
+        }
         if (null !== $this->file) {
-            // faites ce que vous voulez pour générer un nom unique
             $this->path = sha1(uniqid(mt_rand(), true)).'.'.$this->file->guessExtension();
         }
     }
@@ -208,10 +214,17 @@ class Joke
     public function upload()
     {
         if (null === $this->file) {
-            return;
+            if (null === $this->tmpPath) {
+                return;
+            }
+            $path = $this->getUploadRootDir() . '/' . $this->path;
+            copy($this->tmpPath, $path);
         }
-
-        $this->file->move($this->getUploadRootDir(), $this->path);
+        else {
+            $this->file->move($this->getUploadRootDir(), $this->path);
+        }
+        
+        // generate thumbnail
         $thumbnailPath = $this->getUploadRootDir() . '/min-' . $this->path;
         CommonHelper::resizeImage($this->getAbsolutePath(), $thumbnailPath, self::THUMB_HEIGHT);
 

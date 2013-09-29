@@ -19,5 +19,5 @@ parameters:
         consumer_secret:    xxxxxx
         oauth_token:        xxxxxx
         oauth_secret:       xxxxxx
-
-        gettimeline_url:    https://api.twitter.com/1.1/statuses/user_timeline.json
+        usertimeline_url: 'https://api.twitter.com/1.1/statuses/user_timeline.json'
+        hometimeline_url: 'https://api.twitter.com/1.1/statuses/home_timeline.json'

@@ -14,3 +14,5 @@ footy_jokes_api:
     resource: "@FootyJokesAPIBundle/Resources/config/routing.yml"
     prefix:   /api
 
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

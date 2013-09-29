@@ -3,5 +3,5 @@ parameters:
 
 services:
     footy_jokes_import.twitter:
-      class:      FootyJokes\ImportBundle\Twitter\TwitterManager
+      class:      FootyJokes\ImportBundle\Services\TwitterManager
       arguments:  ["@service_container"]

@@ -21,3 +21,9 @@ footy_jokes_api_random_joke:
 footy_jokes_api_add_joke:
     pattern:  /joke/add
     defaults: { _controller: FootyJokesAPIBundle:Joke:add }
+    
+footy_jokes_api_add_joke_from_url:
+    pattern:  /joke/add/from/url
+    defaults: { _controller: FootyJokesAPIBundle:Joke:addFromUrl }
+    options:
+        expose: true

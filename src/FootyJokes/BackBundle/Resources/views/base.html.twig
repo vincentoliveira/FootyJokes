@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FootyJokes</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        {% block meta %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% endblock %}
+        
+        {% block stylesheets %}
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap-theme.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+        {% endblock %}
+
+        <link rel="icon" type="image/x-icon" ref="{{ asset('favicon.ico') }}">
+    </head>
+    <body>
+        {% include "FootyJokesBackBundle::nav_bar.html.twig" %}
+            
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+        <hr/>
+        <footer>
+            <div class="container">
+                <p>&copy; Footyjokes - Sharimg 2013</p>
+            </div>
+        </footer>
+
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="/js/fos_js_routes.js"></script>
+        {% endblock %}
+    </body>
+</html>

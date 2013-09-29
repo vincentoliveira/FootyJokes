@@ -1,25 +1,70 @@
-{% extends "::base.html.twig" %}
+{% extends "FootyJokesBackBundle::base.html.twig" %}
 {% block body %}
-    <table>
-        <thead>
-            <tr>
-                <th>{{ 'ID'|trans }}</th>
-                <th>{{ 'Publishing date'|trans }}</th>
-                <th>{{ 'Title'|trans }}</th>
-                <th>{{ 'Image'|trans }}</th>
-                <th>{{ 'Actions'|trans }}</th>
+<div class="page-header">
+    <h1>{{ 'Add joke'|trans }}</h1>
+</div>
+{% for flashMessage in app.session.flashbag.get('error') %}
+    <div class="alert alert-danger">
+        {{ flashMessage|trans }}
+    </div>
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('success') %}
+    <div class="alert alert-success">
+        {{ flashMessage|trans }}
+    </div>
+{% endfor %}
+<form role="form" action="#" method="POST" {{ form_enctype(form) }}>
+    <div class="form-group">
+        {{ form_label(form.date) }}
+        {{ form_widget(form.date) }}
+     </div>
+    <div class="form-group">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+     </div>
+    <div class="form-group">
+        {{ form_label(form.file) }} {{ 'or'|trans }} {{ form_label(form.url) }}
+        {{ form_widget(form.file) }} {{ 'or'|trans }} {{ form_widget(form.url) }}
+     </div>
+    <div class="checkbox">
+        {{ form_label(form.visible) }}
+        {{ form_widget(form.visible) }}
+    </div>
+    {{ form_rest(form) }}
+    <button  type="submit" class="btn btn-primary">{{'Add joke'|trans }}</button>
+</form>
+
+<div class="page-header">
+    <h1>{{ 'Jokes'|trans }}</h1>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>{{ 'ID'|trans }}</th>
+            <th>{{ 'Publishing date'|trans }}</th>
+            <th>{{ 'Title'|trans }}</th>
+            <th>{{ 'Image'|trans }}</th>
+            <th>{{ 'Actions'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for joke in jokes %}
+            <tr {% if not joke.visible %}style="background: #FFBBAE;"{% endif %}>
+                <td>{{ joke.id }}</td>
+                <td>{{ joke.date|date('d/m/Y') }}</td>
+                <td>{{ joke.title }}</td>
+                <td><a href="/{{ joke.webPath }}" target="_blank">{{ joke.path }}</a></td>
+                <td><a href="{{ path('footy_jokes_back_edit_joke', {id: joke.id, page: page}) }}">Edit</a></td>
             </tr>
-        </thead>
-        <tbody>
-            {% for joke in jokes %}
-                <tr {% if not joke.visible %}style="background: #FFBBAE;"{% endif %}>
-                    <td>{{ joke.id }}</td>
-                    <td>{{ joke.date|date('d/m/Y') }}</td>
-                    <td>{{ joke.title }}</td>
-                    <td><a href="{{ joke.webPath }}" target="_blank">{{ joke.path }}</a></td>
-                    <td><a href="{{ path('footy_jokes_back_edit_joke', {id: joke.id, page: page}) }}">Edit</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        {% endfor %}
+    </tbody>
+</table>
+
+<ul class="pagination">
+    <li><a href="#">&laquo;</a></li>
+    {% for i in 1..maxPages %}
+        <li {% if page == i %}class="active"{% endif %}><a href="{{ path('footy_jokes_back_joke_list', {page: i}) }}">{{ i }}</a></li>
+    {% endfor %}
+    <li><a href="#">&raquo;</a></li>
+</ul>
 {% endblock %}

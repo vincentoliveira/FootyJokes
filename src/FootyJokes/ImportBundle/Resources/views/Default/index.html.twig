@@ -1,1 +1,52 @@
-Hello {{ name }}!
+{% extends "FootyJokesBackBundle::base.html.twig" %}
+{% block body %}
+<div class="bs-header" id="content">
+    <div class="container">
+        <h1>{{ 'Import'|trans }}</h1>
+        <p>{{ 'These tools allow you to import data from other application'|trans }}</p>
+    </div>
+</div>
+<div class="page-header">
+    <h1>From Twitter</h1>
+</div>
+<div>
+    <div class="alert alert-danger twitter-alert">
+        {{ 'Enter a twitter account username.'|trans }}
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="twitter-username-input" placeholder="{{ 'Enter username'|trans }}" />
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary twitter-btn user-timeline-btn">{{ 'User timeline'|trans }}</button>
+        <button type="button" class="btn btn-primary twitter-btn home-timeline-btn">{{ 'Home timeline'|trans }}</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    $(document).ready(function() {
+        $('.alert').alert().hide();
+        
+        $('.twitter-btn').click(function(e) {
+            e.preventDefault();
+            
+            var username = $('#twitter-username-input').val();
+            if (username === '') {
+                $('.twitter-alert').show(200);
+                return;
+            }
+            
+            if ($(this).hasClass('user-timeline-btn'))
+            {
+                window.location = Routing.generate('footy_jokes_import_twitter_user_timeline', {screenName:username});
+            }
+            else if ($(this).hasClass('home-timeline-btn'))
+            {
+                window.location = Routing.generate('footy_jokes_import_twitter_home_timeline', {screenName:username});
+            }
+        })
+    });
+</script>
+{% endblock %}

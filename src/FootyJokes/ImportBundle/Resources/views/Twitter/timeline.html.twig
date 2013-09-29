@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+{% extends "FootyJokesBackBundle::base.html.twig" %}
 {% block body %}
     <h1>Timeline: {{ screenName }}</h1>
     <table>
@@ -14,11 +14,47 @@
             {% for tweet in timeline %}
                 <tr>
                     <td>{{ tweet.text }}</td>
-                    <td><input id="title-{{ loop.index }}" type="text" value="{{ tweet.title }}" /></td>
-                    <td><a href="{{ tweet.image }}" target="_blank"><img id="img-{{ loop.index }}" width="200" src="{{ tweet.image }}" alt="{{ tweet.image }}" /></a></td>
-                    <td><button class="tweeter-import-btn" id="btn-{{ loop.index }}">Import</button></td>
+                    <td><input id="title-{{ loop.index }}" type="text" class="form-control" value="{{ tweet.title }}" /></td>
+                    <td>{% if tweet.image is not empty %}<a href="{{ tweet.image }}" target="_blank"><img id="img-{{ loop.index }}" width="200" src="{{ tweet.image }}" alt="{{ tweet.image }}" /></a>{% else %}-{% endif %}</td>
+                    <td>{% if tweet.image is not empty %}<button class="btn btn-primary btn-import" id="btn-{{ loop.index }}">Import</button>{% else %}-{% endif %}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+{% endblock %}
+    
+{% block javascripts %}
+{{ parent() }}
+    <script>
+        $(document).ready(function() {
+            $('.alert').alert().hide();
+        
+            $('.btn-import').click(function(e) {
+                e.preventDefault();
+            
+                var id = $(this).attr('id').substring(4);
+            
+                var joke = new Object();
+                var date = new Date();
+                joke.date = date.getDay()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();;
+                joke.title = $('#title-'+id).val();
+                joke.url = $('#img-'+id).attr("src");
+                joke.visible = true;
+            
+                var url = Routing.generate('footy_jokes_api_add_joke_from_url');
+            
+                $.post(url, JSON.stringify(joke), function (data) {
+                    if ('joke' in data) {
+                        alert('Joke imported.');
+                    }
+                    else if('errMsg' in data) {
+                        alert(data.errMsg);
+                    }
+                    else {
+                        alert('An error has occured');
+                    }
+                });
+            })
+        });
+        </script>
 {% endblock %}

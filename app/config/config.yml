@@ -68,3 +68,9 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+
+
+services:
+  footy_jokes.joke_manager:
+    class:      FootyJokes\APIBundle\Services\JokeManager
+    arguments:  ["@doctrine.orm.entity_manager", "@service_container"]
