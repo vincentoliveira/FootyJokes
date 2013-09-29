@@ -36,7 +36,7 @@
             
                 var joke = new Object();
                 var date = new Date();
-                joke.date = date.getDay()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();;
+                joke.date = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();;
                 joke.title = $('#title-'+id).val();
                 joke.url = $('#img-'+id).attr("src");
                 joke.visible = true;

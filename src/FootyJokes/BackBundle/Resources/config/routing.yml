@@ -1,10 +1,6 @@
 footy_jokes_back_index:
     pattern:  /
     defaults: { _controller: FootyJokesBackBundle:Default:index }
-
-footy_jokes_back_add_joke:
-    pattern:  /joke/add
-    defaults: { _controller: FootyJokesBackBundle:Joke:add }
     
 footy_jokes_back_edit_joke:
     pattern:  /joke/edit/{id}/{page}
