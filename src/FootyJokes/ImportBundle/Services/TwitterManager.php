@@ -38,6 +38,8 @@ class TwitterManager
         
         $parameters = array();
         $parameters['screen_name'] = $screenName;
+        $parameters['count'] = 50;
+        $parameters['contributor_details'] = false;
         $timelineArray = $connection->get($twtterData['usertimeline_url'], $parameters);
         
         $timeline = array();
@@ -90,9 +92,8 @@ class TwitterManager
             $media = isset($tweet->entities->media) ? $tweet->entities->media : null;
             if (!empty($media)) {
                 $tweetData['image'] = $media[0]->media_url;
-            }
-            else {
-                $tweetData['image'] = null;                
+            } else {
+                $tweetData['image'] = null;
             }
             
             $timeline[] = $tweetData;

@@ -14,7 +14,7 @@ use FootyJokes\APIBundle\Helper\CommonHelper;
  */
 class Joke
 {
-    const THUMB_HEIGHT = 300;
+    const THUMB_WIDTH = 320;
     
     /**
      * @var integer
@@ -226,7 +226,7 @@ class Joke
         
         // generate thumbnail
         $thumbnailPath = $this->getUploadRootDir() . '/min-' . $this->path;
-        CommonHelper::resizeImage($this->getAbsolutePath(), $thumbnailPath, self::THUMB_HEIGHT);
+        CommonHelper::resizeImage($this->getAbsolutePath(), $thumbnailPath, self::THUMB_WIDTH);
 
         unset($this->file);
     }

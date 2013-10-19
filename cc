@@ -1,4 +1,5 @@
 sudo -u www-data php app/console assets:install web --symlink
+sudo -u www-data php app/console fos:js-routing:dump
 
 chmod -R 0777 app/cache
 chmod -R 0777 app/logs

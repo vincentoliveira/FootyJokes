@@ -10,15 +10,15 @@ class CommonHelper
      * 
      * @param string $source_image_path             Chemin d'accès à l'image originale (sur le serveur)
      * @param string $destination_image_path        Chemin de destination de l'image redimensionné (sur le serveur)
-     * @param string $maxHeight                     Hauteur de l'image voulue
-     * @param string $maxWidth                      Largeur de l'image voulue (facultatif)
+     * @param string $maxWidth                      Largeur de l'image voulue
+     * @param string $maxHeight                     Hauteur de l'image voulue (facultatif)
      * @param bool   $getSizes                      If true, just return sizes, else do the job
      * 
      * @return boolean
      */
-    static public function resizeImage($source_image_path, $destination_image_path, $maxHeight = null, $maxWidth = null, $getSizes = false)
+    static public function resizeImage($source_image_path, $destination_image_path, $maxWidth = null, $maxHeight = null, $getSizes = false)
     {
-        if (empty($source_image_path) || !file_exists($source_image_path) || is_dir($source_image_path) || empty($maxHeight)) {
+        if (empty($source_image_path) || !file_exists($source_image_path) || is_dir($source_image_path) || empty($maxWidth)) {
             return false;
         }
 
@@ -38,12 +38,12 @@ class CommonHelper
             return false;
         }
         
-        $thumbnail_image_height = $maxHeight;
-        if ($maxWidth != null) {
-            $thumbnail_image_width = $maxWidth;
+        $thumbnail_image_width = $maxWidth;
+        if ($maxHeight != null) {
+            $thumbnail_image_height = $maxHeight;
         }
         else {
-            $thumbnail_image_width = (int) ($source_image_width * $maxHeight / $source_image_height );
+            $thumbnail_image_height = (int) ($source_image_height * $maxWidth / $source_image_width );
         }
         
         // if getSizes option, just return sizes
